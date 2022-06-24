@@ -15,18 +15,24 @@
 int	main(void)
 {
 	char		*readed_line;
-	t_tockens	*tockens_list;
+	char		*trimmed_readed_line;
+	t_tokens	*list_head;
 
+	list_head = NULL;
 	while (1)
 	{
 		readed_line = readline(">> ");
 		if (!ft_strlen(readed_line))
 			continue;
 		add_history(readed_line);
-		tockens_list = lexer(readed_line);
+		trimmed_readed_line = ft_strtrim(readed_line, " ");
+		free(readed_line);
+		if (!trimmed_readed_line)
+			continue;
+		list_head = lexer(list_head, trimmed_readed_line);
 		// parser();
 		// executor();
-		free(readed_line);
+		free(trimmed_readed_line);
 	}
 	return(0);
 }

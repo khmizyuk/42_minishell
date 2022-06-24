@@ -7,14 +7,14 @@ O_FILES = $(C_FILES:.c=.o)
 LIB_DIR = libft/
 
 CC = gcc
-Flags = -Wall -Wextra -Werror -Ireadline -Lreadline
+Flags = -Wall -Wextra -Werror
 RM = rm -f
 
 all: $(MINISHELL)
 
 $(MINISHELL): $(O_FILES)
 	make -C $(LIB_DIR) --silent
-	$(CC) -o $(MINISHELL) $(O_FILES) -L $(LIB_DIR) -lft
+	$(CC) -Ireadline -Lreadline -o $(MINISHELL) $(O_FILES) -L $(LIB_DIR) -lft
 
 %.o: %.c $(H_FILES)
 	$(CC) $(FLAGS) -o $@ -c $<

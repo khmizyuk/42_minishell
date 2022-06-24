@@ -20,14 +20,15 @@
 #include<readline/readline.h>
 #include<readline/history.h>
 
-typedef struct s_tockens
+typedef struct s_tokens
 {
-	char				*tocken;
+	char				*token;
 	// char				*type_of_tocken; //separator (is_space), files, commands, flag, command_arg, quotes (double and single), redirects (<< < > >>), pipe, IF_OR(&&, ||, ;) ??mixed??
-	struct	s_tockens	*next;
-}	t_tockens;
+	struct	s_tokens	*next;
+}	t_tokens;
 
-t_tockens	*lexer(char *readed_line);
+t_tokens	*lexer(t_tokens *list_head, char *readed_line);
+char		*uncover_token(char *token);
 
 //list_of_all_tockens
 //list_group
