@@ -12,13 +12,14 @@
 
 #include "minishell.h"
 
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
 	char		*readed_line;
 	char		*trimmed_readed_line;
 	t_tokens	*list_head;
 
 	list_head = NULL;
+	exit_status = 0;
 	while (1)
 	{
 		readed_line = readline(">> ");
@@ -29,7 +30,7 @@ int	main(void)
 		free(readed_line);
 		if (!trimmed_readed_line)
 			continue;
-		list_head = lexer(list_head, trimmed_readed_line);
+		list_head = lexer(list_head, trimmed_readed_line, envp);
 		// parser();
 		// executor();
 		free(trimmed_readed_line);

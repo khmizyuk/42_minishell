@@ -1,6 +1,7 @@
 NAME = libft.a
 
-C_FILES = 	ft_atoi.c \
+C_FILES = ft_append.c \
+		  ft_atoi.c \
 		  ft_bzero.c \
 		  ft_calloc.c \
 		  ft_isalnum.c \

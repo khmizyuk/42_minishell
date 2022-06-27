@@ -31,7 +31,7 @@ static t_tokens	*lst_init_new_elem(char *value) //инициализация н�
 	t_tokens	*lst_new_elem;
 
 	lst_new_elem = malloc(sizeof(t_tokens));
-	if (lst_new_elem)
+	if (lst_new_elem && value)
 	{
 		lst_new_elem->token = value;
 		lst_new_elem->next = NULL;
@@ -55,10 +55,10 @@ static t_tokens *lst_add_back(t_tokens *list_head, t_tokens *elem) //добав�
 	return (list_head);
 }
 
-t_tokens	*lexer(t_tokens *list_head, char *readed_line)
+t_tokens	*lexer(t_tokens *list_head, char *readed_line, char **envp)
 {
 	char		*token;
-	char 		*edited_token;
+	char 		*uncovered_token;
 	size_t		i;
 	size_t		j;
 
@@ -71,10 +71,10 @@ t_tokens	*lexer(t_tokens *list_head, char *readed_line)
 		while (readed_line[i + j] && !ft_isspace(readed_line[i + j])) //считается длина слова для обрезания
 			j++;
 		token = ft_substr(readed_line, i, j); //обрезание слова из readed_line: начиная с i-го элемента длиной в j символов
-		uncovering_token = uncover_token(token);
+		uncovered_token = uncover_token(token, envp);
 		free(token);
-		list_head = lst_add_back(list_head, lst_init_new_elem(edited_token)); //добавляем обрезанное слово в список
-		free(uncovering_token);
+		list_head = lst_add_back(list_head, lst_init_new_elem(uncovered_token)); //добавляем обрезанное слово в список
+		free(uncovered_token);
 		i += j;
 		if (readed_line[i])
 			list_head = lst_add_back(list_head, lst_init_new_elem(" ")); //добавляем пробел в список

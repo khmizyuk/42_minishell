@@ -20,6 +20,8 @@
 #include<readline/readline.h>
 #include<readline/history.h>
 
+int	exit_status;
+
 typedef struct s_tokens
 {
 	char				*token;
@@ -27,8 +29,8 @@ typedef struct s_tokens
 	struct	s_tokens	*next;
 }	t_tokens;
 
-t_tokens	*lexer(t_tokens *list_head, char *readed_line);
-char		*uncover_token(char *token);
+t_tokens	*lexer(t_tokens *list_head, char *readed_line, char **envp);
+char		*uncover_token(char *token, char **envp);
 
 //list_of_all_tockens
 //list_group
